@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase_version9_RealtimeDB(G'sACADEMY初学者用サンプル)</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <img src="img/article1.png" alt="" width="1300">
+    <img src="img/article2.png" alt="" width="1300">
+
+    
+    <!-- コンテンツ表示画面 -->
+    <div class="evaluationbuttons">
+    <button type="button" class="likeButton">
+        <svg class="likeButton__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+        Like!
+        </button>
+
+    <button type="button2" class="likeButton2">
+        <svg class="likeButton__icon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+        Wow!
+        </button>
+   
+
+    <button type="button3" class="likeButton3">
+        <svg class="likeButton__icon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+        Really?
+        </button>
+    
+
+    <button type="button4" class="likeButton4">
+        <svg class="likeButton__icon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+        Fantastic!
+        </button>
+    
+
+    <button type="button5" class="likeButton5">
+        <svg class="likeButton__icon2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M91.6 13A28.7 28.7 0 0 0 51 13l-1 1-1-1A28.7 28.7 0 0 0 8.4 53.8l1 1L50 95.3l40.5-40.6 1-1a28.6 28.6 0 0 0 0-40.6z"/></svg>
+        Pick!
+        </button>
+    
+
+    </div>
+
+    <h1>Comments</h1>
+
+
+
+    <div id="output"></div>
+
+    <div>
+        <!-- 各場所にidを設定しましょう -->
+        <div>
+            <input type="text" id = "uname" placeholder="Type Your Name">
+        </div>
+        <div>
+            <textarea id = "text" placeholder="What do you think about this topic?"></textarea>
+        </div>
+        <button id="send" >Send</button>
+        <!-- style.cssに "overflow: auto;"を書いてみましょう！※最後に -->
+        
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.0/firebase-app.js";
+        import { getDatabase, ref, push, set, onChildAdded, remove, onChildRemoved }
+            from "https://www.gstatic.com/firebasejs/9.1.0/firebase-database.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "",
+            authDomain: "",
+            databaseURL: "",
+            projectId: "",
+            storageBucket: "",
+            messagingSenderId: "",
+            appId: "",
+            measurementId: ""
+            };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app); //RealtimeDBに接続
+        const dbRef = ref(db, "chat"); //RealtimeDB内の"chat"を使う
+
+        //データ登録(Click)
+
+        $("#send").on('click', function(){
+            const uname = $('#uname').val();
+            const text = $("#text").val();
+
+            // 表示の確認をしてみましょう🤗
+            console.log(uname,'名前')
+            console.log(text,'テキスト')
+
+            // 送信のデータの塊を作ります🤗
+            // かたまりってなんでしたっけ？？？
+            const msg = {
+                uname:  $('#uname').val(),
+                text:  $("#text").val(),
+            }
+
+            // 送信処理を書きます🤗
+            // firebaseにpush＝送る準備をする🤗 dbRefはみなさんのひみつの鍵の情報🤗
+            const newPostRef = push(dbRef)
+            set(newPostRef, msg)
+
+            // 送信した後に入力欄を空にし、入力しやすくしてみましょう🤗
+            $('#uname').val("");
+            $("#text").val("");
+
+
+            // この下の部分は消さない
+        });
+
+        //データ登録(Enter)
+
+        //最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
+        onChildAdded(dbRef, function(data){
+            const msg = data.val();
+            console.log(msg, 'データの中身')
+            const key = data.key;
+            console.log(key, '鍵の名前')
+
+            // htmlとして埋め込みたいのでテンプレートリテラル(es6の書き方)を使います🤗
+            let html = `
+                <div class="msg">
+                    <p>${msg.uname}</p>
+                    <p>${msg.text}</p>
+                </div>
+            `
+            //#outputの最後に追加
+            $("#output").append(html);
+        })
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var likeButtons = document.getElementsByClassName('likeButton');
+            Array.from(likeButtons).forEach(function(likeButton) {
+            likeButton.addEventListener('click', function() {
+            likeButton.classList.toggle('liked');
+            });
+            });
+            }, false);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var likeButtons2 = document.getElementsByClassName('likeButton2');
+            Array.from(likeButtons2).forEach(function(likeButton2) {
+            likeButton2.addEventListener('click', function() {
+            likeButton2.classList.toggle('liked');
+            });
+            });
+            }, false);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var likeButtons3 = document.getElementsByClassName('likeButton3');
+            Array.from(likeButtons3).forEach(function(likeButton3) {
+            likeButton3.addEventListener('click', function() {
+            likeButton3.classList.toggle('liked');
+            });
+            });
+            }, false);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var likeButtons4 = document.getElementsByClassName('likeButton4');
+            Array.from(likeButtons4).forEach(function(likeButton4) {
+            likeButton4.addEventListener('click', function() {
+            likeButton4.classList.toggle('liked');
+            });
+            });
+            }, false);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            var likeButtons5 = document.getElementsByClassName('likeButton5');
+            Array.from(likeButtons5).forEach(function(likeButton5) {
+            likeButton5.addEventListener('click', function() {
+            likeButton5.classList.toggle('liked');
+            });
+            });
+            }, false);
+
+    </script>
+</body>
+
+</html>

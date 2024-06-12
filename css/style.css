@@ -1,0 +1,242 @@
+/* * {
+  box-sizing: border-box;
+  
+} */
+
+body {
+
+  /* background-color: rgb(247, 252, 145); */
+  width: 1300px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin: 30px 0;
+  font-size: 20px;
+}
+
+input {
+  width: 1300px;
+  padding: 10px;
+  display: block;
+  margin-top: 30px;
+ 
+  
+}
+
+textarea {
+  width: 1300px;
+  height: 200px;
+  padding: 10px;
+  
+  display: block;
+  resize: none;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+button {
+  width: 200px;
+  height: 50px;
+  margin: 0 auto 50px;
+  display: block;
+  font-size: 16px;
+}
+
+#output {
+  width: 1300px;
+  display: block;
+  height: 300px;
+  /* border: 1px solid #ccc; */
+ 
+  /* border-radius: 8px; */
+  padding: 10px;
+  background-color: white;
+  margin-bottom: 20px;
+
+  overflow: auto;
+  
+
+}
+
+.likeButton {
+  color: #888;
+  font-size: 1.5em;
+  background-color: transparent;
+  border: 0.1em solid;
+  border-radius: 1em;
+  /* padding: 0.333em 1em 0.25em; */
+  /* line-height: 1.2em; */
+  box-shadow: 0 0.25em 1em -0.25em;
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+  outline: 0;
+  }
+
+  .likeButton__icon {
+  display: inline-block;
+  fill: currentColor;
+  width: 0.8em;
+  height: 0.8em;
+  margin-right: 0.2em;
+  }
+
+  .likeButton:hover {
+  color: #e5348c;
+  }
+
+  .likeButton.liked {
+  color: #ffffff;
+  background-color: #e5348c;
+  border-color: #e5348c;
+  }
+
+.likeButton2 {
+  color: #888;
+  font-size: 1.5em;
+  background-color: transparent;
+  border: 0.1em solid;
+  border-radius: 1em;
+  padding: 0.333em 1em 0.25em;
+  line-height: 1.2em;
+  box-shadow: 0 0.25em 1em -0.25em;
+  cursor: pointer;
+  transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+  outline: 0;
+  }
+  .likeButton__icon2 {
+    display: inline-block;
+    fill: currentColor;
+    width: 0.8em;
+    height: 0.8em;
+    margin-right: 0.2em;
+    }
+    .likeButton2:hover {
+    color: hsl(22, 100%, 50%);
+    }
+    .likeButton2.liked {
+    color: #ffffff;
+    background-color: hsl(22, 100%, 50%);
+    border-color: hsl(22, 100%, 50%);
+    }
+
+
+    .likeButton3 {
+      color: #888;
+      font-size: 1.5em;
+      background-color: transparent;
+      border: 0.1em solid;
+      border-radius: 1em;
+      padding: 0.333em 1em 0.25em;
+      line-height: 1.2em;
+      box-shadow: 0 0.25em 1em -0.25em;
+      cursor: pointer;
+      transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+      outline: 0;
+      }
+      .likeButton__icon3 {
+      display: inline-block;
+      fill: currentColor;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 0.2em;
+      }
+      .likeButton3:hover {
+      color: hsl(256, 100%, 50%);
+      }
+      .likeButton3.liked {
+      color: #ffffff;
+      background-color: hsl(256, 100%, 50%);
+      border-color: hsl(256, 100%, 50%);
+      }
+
+      .likeButton4 {
+        color: #888;
+        font-size: 1.5em;
+        background-color: transparent;
+        border: 0.1em solid;
+        border-radius: 1em;
+        padding: 0.333em 1em 0.25em;
+        line-height: 1.2em;
+        box-shadow: 0 0.25em 1em -0.25em;
+        cursor: pointer;
+        transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+        outline: 0;
+        }
+        .likeButton__icon4 {
+        display: inline-block;
+        fill: currentColor;
+        width: 0.8em;
+        height: 0.8em;
+        margin-right: 0.2em;
+        }
+        .likeButton4:hover {
+        color: hsl(0, 100%, 50%);
+        }
+        .likeButton4.liked {
+        color: #ffffff;
+        background-color: hsl(0, 100%, 50%);
+        border-color: hsl(0, 100%, 50%);
+        }
+
+        .likeButton5 {
+          color: #888;
+          font-size: 1.5em;
+          background-color: transparent;
+          border: 0.1em solid;
+          border-radius: 1em;
+          padding: 0.333em 1em 0.25em;
+          line-height: 1.2em;
+          box-shadow: 0 0.25em 1em -0.25em;
+          cursor: pointer;
+          transition: color 150ms ease-in-out, background-color 150ms ease-in-out, transform 150ms ease-in-out;
+          outline: 0;
+          }
+          .likeButton__icon5 {
+          display: inline-block;
+          fill: currentColor;
+          width: 0.8em;
+          height: 0.8em;
+          margin-right: 0.2em;
+          }
+          .likeButton5:hover {
+          color: hsl(202, 100%, 50%);
+          }
+          .likeButton5.liked {
+          color: #ffffff;
+          background-color: hsl(202, 100%, 50%);
+          border-color: hsl(202, 100%, 50%);
+          }
+
+    .evaluationbuttons {
+
+      display: flex;
+      margin-top: 30px;
+    }
+
+    .msg:nth-child(odd){
+      margin-right:  auto;
+      border: none;
+      padding: 20px;
+      width:1300px;
+      margin-top: 10px;
+      background-color: #e8e7e7;
+      
+    }
+
+    .msg:nth-child(even){
+      margin-right:  auto;
+      border: none;
+      padding: 20px;
+      width:1300px;
+      margin-top: 10px;
+      background-color: #e8e7e7;
+      
+    }
+
+
+
+
+   
+ 
